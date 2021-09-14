@@ -33,7 +33,7 @@ def train():
         # 优化器的使用策略
         if k == 0:
             optimizer = torch.optim.SGD(net.parameters(), lr=learning_rate, momentum=0.9, weight_decay=5e-4)
-        elif k == 2:
+        elif k == 5:
             optimizer = torch.optim.SGD(net.parameters(), lr=learning_rate / 10, momentum=0.9, weight_decay=5e-4)
         elif k == 100:
             optimizer = torch.optim.SGD(net.parameters(), lr=learning_rate / 100, momentum=0.9, weight_decay=5e-4)
@@ -50,9 +50,9 @@ def train():
 
             print('epoch [%d]/[%d] Iter [%d/%d] Loss: %.4f, average_loss: %.4f' % (
                 k + 1, num_epochs, i + 1, len(train_loader), loss.item(), total_loss / (i + 1)))
-        if k > 0 and k % per_batch_size_to_save == 0:
-            torch.save(net.state_dict(), be_save_model_path)
-    torch.save(net.state_dict(), be_save_model_path)
+            if i > 0 and i % per_batch_size_to_save == 0:
+                torch.save(net.state_dict(), be_save_model_path)
+        torch.save(net.state_dict(), be_save_model_path)
 
 
 if __name__ == '__main__':
@@ -64,7 +64,7 @@ if __name__ == '__main__':
     # 学习率可以设置为3、1、0.5、0.1、0.05、0.01、0.005,0.005、0.0001、0.00001
     learning_rate = 0.001
     # 数据集训练次数
-    num_epochs = 4
+    num_epochs = 5
     # 每次训练的图片数量
     batch_size = 10
     # 保存间隔次数
