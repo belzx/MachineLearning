@@ -1,0 +1,6 @@
+data
+venv
+Yolo-v1/output/image/*
+Yolo-v1/output/models/*
+.idea
+__pycache__
