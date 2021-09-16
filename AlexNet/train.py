@@ -37,26 +37,25 @@ def mnist_train():
     for k in range(num_epochs):
         total_loss = 0.
         for i, (data, target) in enumerate(dataset.train_loader):
-            while True:
-                optimizer.zero_grad()
-                batch_s = data.shape[0]
-                data = t(data)
-                data = data.expand(batch_s, 3, image_size, image_size)  # [batch_size,3，224，224]
-                pred = net(data)
+            optimizer.zero_grad()
+            batch_s = data.shape[0]
+            data = t(data)
+            data = data.expand(batch_s, 3, image_size, image_size)  # [batch_size,3，224，224]
+            pred = net(data)
 
-                _target = torch.zeros(batch_s, pred_class_num)  # [batch_size,10]
-                for index, l in enumerate(_target):
-                    l[target[index].item()] = 1
-                loss = F.mse_loss(pred, _target, size_average=False) / len(data)
-                total_loss += loss.item()
-                loss.backward()
-                optimizer.step()
+            _target = torch.zeros(batch_s, pred_class_num)  # [batch_size,10]
+            for index, l in enumerate(_target):
+                l[target[index].item()] = 1
+            loss = F.mse_loss(pred, _target, size_average=False) / len(data)
+            total_loss += loss.item()
+            loss.backward()
+            optimizer.step()
 
-                print('Epoch [%d]/[%d] Iter [%d/%d] Loss: %.4f, average_loss: %.4f' % (
-                    k + 1, num_epochs, i + 1, len(dataset.train_loader), loss.item(), total_loss / (i + 1)))
-            if i > 0 and i % per_batch_size_to_save == 0:
-                torch.save(net.state_dict(), be_save_model_path)
+            print('Epoch [%d]/[%d] Iter [%d/%d] Loss: %.4f, average_loss: %.4f' % (
+                k + 1, num_epochs, i + 1, len(dataset.train_loader), loss.item(), total_loss / (i + 1)))
+        if i > 0 and i % per_batch_size_to_save == 0:
             torch.save(net.state_dict(), be_save_model_path)
+        torch.save(net.state_dict(), be_save_model_path)
 
 
 if __name__ == '__main__':
