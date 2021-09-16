@@ -20,9 +20,18 @@ PROJECT_ROOT_PATH = os.path.abspath(os.path.dirname(__file__))
 
 class MnistDataset:
     def __init__(self, batch_size=64):
-        train_dataset = datasets.MNIST(os.path.join(PROJECT_ROOT_PATH,"data"), train=True, transform=transforms.Compose([transforms.ToTensor()]),
-                                       download=True)
-        test_dataset = datasets.MNIST(os.path.join(PROJECT_ROOT_PATH,"data"), train=False, transform=transforms.Compose([transforms.ToTensor()]),
+        train_dataset = datasets.MNIST(os.path.join(PROJECT_ROOT_PATH,"data"),
+                                       train=True,
+                                       transform=transforms.Compose([transforms.ToTensor(),
+                                                                     # transforms.Normalize((0.1307,), (0.3081,)),
+                                                                     ]),
+                                       download=True,
+
+                                       )
+        test_dataset = datasets.MNIST(os.path.join(PROJECT_ROOT_PATH,"data"), train=False,
+                                      transform=transforms.Compose([transforms.ToTensor(),
+                                                                    # transforms.Normalize((0.1307,), (0.3081,)),
+                                                                    ]),
                                       download=True)
         self.train_loader = torch.utils.data.DataLoader(dataset=train_dataset,
                                                         batch_size=batch_size,

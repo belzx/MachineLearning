@@ -59,7 +59,7 @@ def mnist_test():
         # 正确率
         pred_num, pred_index = pred.max(1)
         for k in range(len(target)):
-            if pred_num[k].item() > 0.9 and pred_index[k].item() == target[k].item():
+            if pred_num[k].item() > threshold and pred_index[k].item() == target[k].item():
                 right += 1
 
         print('Iter [%d/%d] Loss: %.4f, average_loss: %.4f,accuracy:  %.4f ' % (i + 1, len(dataset.train_loader), loss.item(), total_loss / (i + 1), right / total_num))
@@ -85,7 +85,8 @@ if __name__ == '__main__':
     be_save_model_path = None
     # 是否使用GPU
     use_gpu = True
-
+    # 阈值
+    threshold = 0.9
     # 1:测试MNIST
     print("START MNIST TRAIN!")
     pred_class_num = MNIST_PRED_CLASS_NUM

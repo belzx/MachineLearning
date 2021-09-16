@@ -2,6 +2,7 @@
 """
 import os
 
+import cv2
 import torch
 from torch.utils.data import DataLoader
 from torchvision.transforms import transforms
@@ -26,32 +27,25 @@ def mnist_predict(img_pah):
     if load_model_path is not None:
         net = model.AlexNet(load_model_path=load_model_path, pred_class_num=pred_class_num)
     else:
-        net = model.AlexNet(pred_class_num=pred_class_num)
+        raise
+    #
+    image = cv2.imread(predict_image_path)
 
-    dataset = utils.MnistDataset(batch_size)
-    optimizer = torch.optim.SGD(net.parameters(), lr=learning_rate, momentum=0.9, weight_decay=5e-4)
-    # 转成224*224格式
-    t = transforms.Compose([
-        transforms.Resize([image_size, image_size])
-    ])
-    total_loss = 0.
-    for i, (data, target) in enumerate(dataset.train_loader):
-        optimizer.zero_grad()
-        # data 转变size
-        batch_s = data.shape[0]
-        data = t(data)
-        data = data.expand(batch_s, 3, image_size, image_size)  # [batch_size,3，224，224]
-        _target = torch.zeros(batch_s, pred_class_num)  # [batch_size,10]
-        for index, l in enumerate(_target):
-            l[target[index].item()] = 1
-        pred = net(data)
-        loss = F.mse_loss(pred, _target, size_average=False) / len(data)
-        loss.backward()
-        optimizer.step()
+    # 调整大小
+    img = cv2.resize(image, (image_size, image_size))
+    transform = transforms.Compose([transforms.ToTensor(), ])
 
-        total_loss += loss.item()
+    # 转tensor调整为(3*224*224)
+    img = transform(img)
+    img = img.unsqueeze(0)
 
-    torch.save(net.state_dict(), be_save_model_path)
+    pred = net(img)
+
+    _, index = pred.max(1)
+    if _[0].item() > threshold:
+        print("Result is : [%s]" % (str(index[0]),))
+    else:
+        print("No results")
 
 
 if __name__ == '__main__':
@@ -60,20 +54,19 @@ if __name__ == '__main__':
     MNIST_PRED_CLASS_NUM = 10
     # 训练模型的数据大小
     image_size = 224
-    # 学习率可以设置为3、1、0.5、0.1、0.05、0.01、0.005,0.005、0.0001、0.00001
-    learning_rate = 0.1
     # 每次测试的图片数量
     batch_size = 64
     # 保存间隔次数
     per_batch_size_to_save = 5
     # 已有模型
     load_model_path = os.path.join(root_path, r'AlexNet\output\models\alexnet_mnist.pth')
-    # 训练好的模型保存路径
-    # be_save_model_path = os.path.join(root_path, r'AlexNet\output\models\alexnet_mnist.pth')
-    # be_save_model_path = None
     # 是否使用GPU
     use_gpu = True
-
+    # 训练好的模型保存路径
+    predict_image_path = os.path.join(root_path, r'AlexNet\xx.png')
+    # be_save_model_path = None
+    # 阈值
+    threshold = 0.9
     # 1:测试MNIST
     print("START MNIST TRAIN!")
     pred_class_num = MNIST_PRED_CLASS_NUM
