@@ -14,13 +14,24 @@ import torchvision.transforms as transforms
 from torch.utils.data import Dataset, DataLoader
 
 # 当前项目跟路径
+from torchvision import datasets
+
 PROJECT_ROOT_PATH = os.path.abspath(os.path.dirname(__file__))
 
+class MnistDataset:
+    def __init__(self, batch_size=64):
+        train_dataset = datasets.MNIST(os.path.join(PROJECT_ROOT_PATH,"data"), train=True, transform=transforms.Compose([transforms.ToTensor()]),
+                                       download=True)
+        test_dataset = datasets.MNIST(os.path.join(PROJECT_ROOT_PATH,"data"), train=False, transform=transforms.Compose([transforms.ToTensor()]),
+                                      download=True)
+        self.train_loader = torch.utils.data.DataLoader(dataset=train_dataset,
+                                                        batch_size=batch_size,
+                                                        shuffle=True)
+        self.test_loader = torch.utils.data.DataLoader(dataset=test_dataset,
+                                                       batch_size=batch_size,
+                                                       shuffle=False)
 
-class MyDataset(Dataset):
-    #
-    GRID_NUM = 7
-
+class YoloDataset(Dataset):
     def __init__(self, xml_dir, image_dir, dict_class_index_file, transform_size,
                  grid_num=7):
         """
@@ -231,21 +242,25 @@ def get_name_by_index(file_path, index) -> dict:
     return None
 
 
+
 if __name__ == '__main__':
     # 测试
     root_path = PROJECT_ROOT_PATH
     xml_dir = os.path.join(root_path, r'data\train\VOC2007\Annotations')
     image_dir = os.path.join(root_path, r'data\train\VOC2007\JPEGImages')
     classname_to_index_file_path = os.path.join(root_path, r'data\voc2007-class-to-index.txt')
-
+    minist_dir = os.path.join(root_path, r'data')
     # 1：根据index获取其对应名称
-    get_name_by_index(classname_to_index_file_path, 1)
+    # get_name_by_index(classname_to_index_file_path, 1)
 
     # 2:获取物体类型以及对应的数字种类
-    r = get_object_to_index(classname_to_index_file_path)
-    print(r)
+    # r = get_object_to_index(classname_to_index_file_path)
+    # print(r)
 
     # 3:读取xml文档的信息
-    a = MyDataset(xml_dir, image_dir, classname_to_index_file_path, 448)
-    a.paint_xml_img("000005.jpg")
-    print("utils!!")
+    # a = YoloDataset(xml_dir, image_dir, classname_to_index_file_path, 448)
+    # a.paint_xml_img("000005.jpg")
+
+    # 4:MINIST数据集
+    # a = MnistDataset()
+    pass

@@ -10,7 +10,7 @@
 
 **参考**
 
-![](local_data\1.png)
+![](.\local_data\1.png)
 
 3:安装依赖: pip install -r requirements.txt
 ### Yolo-v1
@@ -29,3 +29,9 @@ TODO
 TODO
 ### Yolo-5
 TODO
+
+### AlexNet
+**完成度80%**
+**已经完成**
+1：训练模型、测试、预测代码已经完成
+

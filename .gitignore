@@ -1,6 +1,6 @@
 data
 venv
-Yolo-v1/output/image/*
-Yolo-v1/output/models/*
+*/output/image/*
+*/output/models/*
 .idea
 __pycache__
