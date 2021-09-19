@@ -53,6 +53,7 @@ def mnist_train():
             optimizer.step()
 
             total_loss += loss.item()
+
             print('Epoch [%d]/[%d] Iter [%d/%d] Loss: %.4f, average_loss: %.4f' % (
                 k + 1, num_epochs, i + 1, len(dataset.train_loader), loss.item(), total_loss / (i + 1)))
             if i > 0 and i % per_batch_size_to_save == 0:

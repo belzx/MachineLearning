@@ -37,7 +37,7 @@ class MnistNet(nn.Module):
         out = self.fc1(out)  # 1 * 500
         out = F.relu(out)
         out = self.fc2(out)  # 1 * 10
-        out = F.softmax(out, dim=1)
+        # out = F.softmax(out, dim=1)
         return out
 
 

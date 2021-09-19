@@ -76,16 +76,16 @@ if __name__ == '__main__':
     # 训练模型的数据大小
     image_size = 224
     # 学习率可以设置为3、1、0.5、0.1、0.05、0.01、0.005,0.005、0.0001、0.00001
-    learning_rate = .1
+    learning_rate = .01
     # 数据集训练次数10
-    num_epochs = 30
+    num_epochs = 5
     # 每次训练的图片数量
-    batch_size = 128
+    batch_size = 64
     # 保存间隔次数
     per_batch_size_to_save = 30
     # 已有模型
-    load_model_path = os.path.join(root_path, r'AlexNet\output\models\alexnet_mnist.pth')
-    # load_model_path = None
+    # load_model_path = os.path.join(root_path, r'AlexNet\output\models\alexnet_mnist.pth')
+    load_model_path = None
     # 训练好的模型保存路径
     be_save_model_path = os.path.join(root_path, r'AlexNet\output\models\alexnet_mnist.pth')
     # 是否使用GPU
