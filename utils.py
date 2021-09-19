@@ -3,6 +3,7 @@ import os
 import xml
 import xml.dom.minidom
 import cv2
+from torch import tensor
 from torch.utils.data import Dataset, DataLoader
 import numpy as np
 import os
@@ -18,9 +19,10 @@ from torchvision import datasets
 
 PROJECT_ROOT_PATH = os.path.abspath(os.path.dirname(__file__))
 
+
 class MnistDataset:
     def __init__(self, batch_size=64):
-        train_dataset = datasets.MNIST(os.path.join(PROJECT_ROOT_PATH,"data"),
+        train_dataset = datasets.MNIST(os.path.join(PROJECT_ROOT_PATH, "data"),
                                        train=True,
                                        transform=transforms.Compose([transforms.ToTensor(),
                                                                      # transforms.Normalize((0.1307,), (0.3081,)),
@@ -28,7 +30,7 @@ class MnistDataset:
                                        download=True,
 
                                        )
-        test_dataset = datasets.MNIST(os.path.join(PROJECT_ROOT_PATH,"data"), train=False,
+        test_dataset = datasets.MNIST(os.path.join(PROJECT_ROOT_PATH, "data"), train=False,
                                       transform=transforms.Compose([transforms.ToTensor(),
                                                                     # transforms.Normalize((0.1307,), (0.3081,)),
                                                                     ]),
@@ -39,6 +41,7 @@ class MnistDataset:
         self.test_loader = torch.utils.data.DataLoader(dataset=test_dataset,
                                                        batch_size=batch_size,
                                                        shuffle=False)
+
 
 class YoloDataset(Dataset):
     def __init__(self, xml_dir, image_dir, dict_class_index_file, transform_size,
@@ -187,6 +190,10 @@ class YoloDataset(Dataset):
                                 (255, 255, 255), 1, 8)
             cv2.imshow(image_name, image)
             cv2.waitKey(0)
+
+            # ii = np.transpose(data[0], (1, 2, 0))
+            # plt.imshow(ii)
+            # plt.show()
             return
 
     def get_name_by_index(self, index):
@@ -195,7 +202,6 @@ class YoloDataset(Dataset):
             if d[i] == index:
                 return i
         return None
-
 
 def print_index_of_class(xml_dir):
     """
@@ -251,6 +257,24 @@ def get_name_by_index(file_path, index) -> dict:
     return None
 
 
+def loop_helper(loop_param_list, start_fun=None, excute_fun=None, end_fun=None):
+    """
+    loop_param:
+    [[1,{}],[3,{}]....]
+    """
+    if start_fun is not None:
+        start_fun()
+
+    for i in range(len(loop_param_list)):
+        loop_param = loop_param_list[i]
+
+        for k in range(int(loop_param[0])):
+            if excute_fun is not None:
+                excute_fun(*[i, k, loop_param[1]])
+
+    if end_fun is not None:
+        excute_fun()
+
 
 if __name__ == '__main__':
     # 测试
@@ -259,6 +283,8 @@ if __name__ == '__main__':
     image_dir = os.path.join(root_path, r'data\train\VOC2007\JPEGImages')
     classname_to_index_file_path = os.path.join(root_path, r'data\voc2007-class-to-index.txt')
     minist_dir = os.path.join(root_path, r'data')
+
+
     # 1：根据index获取其对应名称
     # get_name_by_index(classname_to_index_file_path, 1)
 
@@ -272,4 +298,17 @@ if __name__ == '__main__':
 
     # 4:MINIST数据集
     # a = MnistDataset()
+
+    # 5:
+    # def start(*k):
+    #     print(k)
+    #
+    # def excute(*k):
+    #     print(k)
+    #
+    # def end(*k):
+    #     print(k)
+    #
+    # loop_param_list = [[1, {"1": 1}], [2, {"3": 1}]]
+    # loop_helper(loop_param_list, start_fun=start, excute_fun=excute, end_fun=end)
     pass

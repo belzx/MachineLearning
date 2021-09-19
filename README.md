@@ -35,3 +35,31 @@ TODO
 **已经完成**
 1：训练模型、测试、预测代码已经完成
 
+### MnistNet
+Mnist数据集识别CNN网络，训练20个循环后，测试正确率百分97
+**完成度100%**
+
+
+### other
+```
+一些在使用中记录的疑点
+sigmoid() 与 softmax()的区别
+sigmoid:多标签问题
+softmax:单标签问题，互斥输出
+https://zhuanlan.zhihu.com/p/69771964
+
+log_softmax:结果存在负数
+
+在训练mnist时不同的优化器
+SGD
+ADM
+各个参数含义:
+
+损失函数:
+cross_entropy:
+mse_loss:
+nll_loss:
+参数含义:
+
+```
+
