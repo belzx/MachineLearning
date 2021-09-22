@@ -70,8 +70,8 @@ if __name__ == '__main__':
     # 保存间隔次数
     per_batch_size_to_save = 5
     # 已有模型
-    load_model_path = os.path.join(root_path, r'Yolo-v1\output\models\best.pth')
-    # load_model_path = None
+    # load_model_path = os.path.join(root_path, r'Yolo-v1\output\models\best.pth')
+    load_model_path = None
     # 训练好的模型保存路径
     be_save_model_path = os.path.join(root_path, r'Yolo-v1\output\models\best.pth')
     # 是否使用GPU
