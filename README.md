@@ -46,10 +46,13 @@ Mnist数据集识别CNN网络，训练20个循环后，测试正确率百分97
 TODO
 
 ### GoogleNet
-https://arxiv.org/abs/1409.4842
-TODO
+见GoogLeNet模块下README
 
 ### VGG
+TODO
+
+### R-CNN
+TODO
 
 
 ### other
