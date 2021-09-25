@@ -69,7 +69,7 @@ Arora 提出了一个层堆叠的结构，其中我们应该分析上一层的�
 （Arora et al. [2] suggests a layer-by layer construction in which one should analyze
 the correlation statistics of the last layer and cluster them into groups of units with high correlation）
 
-![](local_data/2.png)
+![2](https://user-images.githubusercontent.com/28073374/134776139-e6510e27-9649-4db6-8cbf-beeff31e37df.png)
 
 图a：使用了1*1 3*3 5*5 同时并行池有效果，又加了一个并行池
 
@@ -93,7 +93,8 @@ layers in traditional convolutional fashion）
 
 ## 5：GoogLeNet
 ### 具体网络设计
-![](local_data/3.png)
+
+![3](https://user-images.githubusercontent.com/28073374/134776148-bb82c88b-4ad7-400e-be91-9a677961f747.png)
 
 GoogLeNet incarnation of the Inception architecture
 
@@ -121,7 +122,7 @@ can be run on individual devices including even those with limited computational
 
 ### 神经网络结构如下
 
-![](local_data/4.png)
+![4](https://user-images.githubusercontent.com/28073374/134776153-2a3d7802-7b2e-4040-b62d-4e83609bf282.png)
 
 ## 6 Training Methodology
 ### 关于训练方式
