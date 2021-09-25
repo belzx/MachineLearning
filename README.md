@@ -10,7 +10,7 @@
 
 **参考**
 
-![](.\local_data\1.png)
+![1](https://user-images.githubusercontent.com/28073374/134776211-f9abff00-ac19-4a69-81ae-206efe765dd9.png)
 
 3:安装依赖: pip install -r requirements.txt
 ### Yolo-v1
