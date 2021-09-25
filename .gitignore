@@ -4,4 +4,4 @@ venv
 */output/models/*
 .idea
 __pycache__
-解读
+local_data
