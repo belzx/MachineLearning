@@ -7,7 +7,7 @@ ResNet网络
 
 我们明确的将网络层重新规划为学习关于每层输入的残差函数---在数理统计中，残差是指实际观察值与估计值（拟合值）之间的差---而不是学习无参照函数（翻译的不是太明白）
 
-(We explicitly reformulate the layers as learning residual functions with reference to the layer inputs, instead of learning unreferenced functions)
+(We explicitly reformulate the layers as learning residual functions with reference to the layer inputs, instead of learning unreferenced functions)
 
 我们提供了以实验为依据的证据，用以表明残差网络是更容易去最优化，并且可以从相当大的深度中获取精确度（一般的网络是这样的：随着网络深度的增加，训练精确度达到了饱和，然后再急剧衰退）。此外，深度残差网络相比较于1/8深VGG网络还更简单（网络越复杂，越容易过拟合）。
 
