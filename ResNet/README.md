@@ -1,6 +1,6 @@
 ResNet网络
 
-paper地址:https://arxiv.org/abs/1512.03385
+论文地址:https://arxiv.org/abs/1512.03385
 
 ## Abstract
 深度神经网络变得更加难以训练，我们提出了一种残差网络网络模型以尝试去解决这一问题
@@ -18,7 +18,7 @@ paper地址:https://arxiv.org/abs/1512.03385
 
 但是吧，当一个更深的网络开始收敛的时候，有个退化的问题就暴露出来了:随着网络深度的增加，训练精度达到了饱和，随后快速下降，精度下降并不是过度拟合导致的，并且更多层数会让模型导致更多的训练错误,如下图所示:
 
-![img.png](img.png)
+![img](https://user-images.githubusercontent.com/28073374/135264937-b43d4823-df9c-4cc2-9a26-544e2fd7d124.png)
 
 训练精度的下降揭示了一个现象，不是所有的网络都相似的很容易优化。让我们考虑一个浅一点的架构，并且这个架构层数（Let us consider a
 shallower architecture and its deeper counterpart that adds
@@ -35,7 +35,7 @@ model.)
 
 F(x) + x 公式可以通过具有“shortcut connections（捷径连接）”的前向传递神经网络得以实现，如下图：
 
-![img_1.png](img_1.png)
+![img_1](https://user-images.githubusercontent.com/28073374/135264953-91bf1214-3a76-458c-8841-a9e204a8c81d.png)
 
 shortcut connections 是指向跳过一或者多层。在我们的案例中，shortcut connections仅仅执行identity mapping，并且其输出与堆叠的网络层输出相加。恒等的捷径连接既没有增加额外的参数又没有增加计算复杂度。整个网络任然可以通过具备反向传递的SGD算法进行端到端的训练，并且可以很容易的使用公共类库（caffe/caffe2）进行实现，而不需要修改求解程序。
 
@@ -62,11 +62,11 @@ TODO
 在真实的情况中，特征映射不太可能是最优解。但是我们的重新的表述的残差学习可能有助于去预先设定这个问题。如果一个最优函数更接近特征映射而不是空映射，那么发现一个查找与恒等式相关的扰动
 映射就更加简单，而不是去学习一个新的函数。我们展示，通过实验(如下图)，学习到的残差函数 一般来说，他们的反应很小，这表明了，特征映射提供了合理的预处理。
 
-
-![img_4.png](img_4.png)
+![img_4](https://user-images.githubusercontent.com/28073374/135264976-50658a90-9d76-4b3b-998f-b61fa3438c49.png)
 
 ### 3.2. Identity Mapping by Shortcuts
-![img_5.png](img_5.png)
+![img_5](https://user-images.githubusercontent.com/28073374/135265028-a290b31b-8692-4758-9a0c-9e976249f3a7.png)
+
 我们每隔几个堆叠网络使用残差学习，构建块如上图图所示。形式上，在这篇论文中，我们将构建块定义为:
 
 y = F(x,{w}) +x
@@ -87,7 +87,8 @@ y = F(x, {Wi}) + Wsx.
 
 我们已经测试了大量的普通/残差网络，并且已经观察到了大象一致的现象。为了提供讨论的实例，接下来我们为ImageNet描述了两种模型。如图
 
-![img_6.png](img_6.png)
+![img_6](https://user-images.githubusercontent.com/28073374/135265008-c8f2bf4c-0fcb-45b6-a470-b6064432b885.png)
+
 **Plain Network.**
 普通的网络，上图中间的网络，受VGG网络的启发。卷积层大多有3x3过滤器随后跟着两个简单的规则:1,对于相同的输出的特征图大小，图层具有相同数量的过滤器。2，如果特征图大小减半，则过滤器的数量将加倍，以保持每层的时间复杂度。我们通过以下方式直接执行下采样： 步幅为2的卷积层。网络以全局平均池层和1000路结束与softmax完全连接的层。
 
