@@ -1,0 +1,27 @@
+[CVPR 2020 ] 南京大学/腾讯PCG 用于时序建模的轻量级行为识别模型TEA
+TEA: Temporal Excitation and Aggregation for Action Recognition
+https://arxiv.org/abs/2004.01398
+https://github.com/Phoenix1327/tea-action-recognition
+https://zhuanlan.zhihu.com/p/129282832
+
+
+CVPR2020 FAIR X3D超轻量级行为识别模型
+X3D: Expanding Architectures for Efficient Video Recognition
+[CVPR 2020 Oral]X3D Facebook视频理解/行为识别新作
+https://zhuanlan.zhihu.com/p/129279351
+https://zhuanlan.zhihu.com/p/131494746
+https://arxiv.org/abs/2004.04730
+https://github.com/facebookresearch/SlowFast
+
+
+学习资源
+https://alexander-kirillov.github.io/tutorials/visual-recognition-iccv19/
+
+
+代码
+ICCV 2019
+SlowFast Networks for Video Recognition
+https://github.com/facebookresearch/SlowFast
+
+实验数据集下载
+https://deepmind.com/research/open-source/kinetics
